@@ -9,22 +9,19 @@ const service = axios.create({
 
 service.interceptors.response.use(
   response => {
-    const res = response.data;
+    const {res, status} = response.data;
     let message;
-    console.log(response);
-    console.log(res);
     return new Promise((resolve, reject) => {
-      if (res.status == 404) {
+      if (status == 404) {
         message = res.message || '请求找不到';
-      } else if (res.status == 500 || res.status == 503) {
+      } else if (status == 500 || status == 503) {
         message = res.message || '服务器错误';
-      } else if (res.code != 0) {
+      } else if (res.code != 1) {
         message = res.message || res.errorMessage || '未知异常'
       } 
       res.ok = res.code === 1;
       if(message != undefined) {
         resolve(message);
-        console.error({ message })
       } else {
         resolve(res);
       }
