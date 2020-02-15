@@ -1,0 +1,19 @@
+.manage-page {
+  font-size: 1.2em;
+  max-width: 700px;
+  margin: 60px auto 0;
+}
+.manage-page h3 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 1em;
+}
+.manage-page .article-container li {
+  line-height: 30px;
+}
+.manage-page .btn {
+  text-decoration: underline;
+  float: right;
+  margin-right: 15px;
+  cursor: pointer;
+}

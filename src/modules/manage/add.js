@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../css/base.css';
-import './detail.css';
+import '../../css/detail.css';
 
 import showdown  from "showdown";
 import Utils from '../../js/utils';
