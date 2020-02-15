@@ -1,5 +1,4 @@
-dist/*.js
-dist/*.jpg
+dist/
 node_modules/
 dist/*.css
 package-lock.json
