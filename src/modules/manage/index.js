@@ -17,9 +17,24 @@ class Manage extends React.Component {
     })
   }
 
+  del(article) {
+    let confirmed = window.confirm('确认要删除"' + article.title + '"吗？');
+    if(confirmed) {
+      this.alert("删除成功");
+      this.setState({
+        articles: this.state.articles.filter(d => d.id != article.id)
+      })
+    }
+  }
+
   render() {
     let {articles} = this.state;
-    let articleComs = articles.map(d => <li className="item">{d.title}<span className="btn del-btn">delete</span><span className="btn view-btn">view</span></li>);
+    let articleComs = articles.map(d => 
+    <li className="item" key={d.id}>
+      {d.title}
+      <span className="btn del-btn" onClick={()=>{this.del(d)}}>delete</span>
+      <span className="btn view-btn">view</span>
+    </li>);
     return (
       <div className="page manage-page">
         <h3>后台管理</h3>
