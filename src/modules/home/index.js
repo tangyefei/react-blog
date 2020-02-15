@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import '../../css/base.css';
 import './home.css';
 import Req from '../../js/request';
+import Utils from '../../js/utils';
 
 class Home extends React.Component {
   constructor(...args) {
@@ -10,20 +11,20 @@ class Home extends React.Component {
 
     this.state = {
       guides: [
-        {name: "http://book.tangyefei.cn/javascript-guide/_book/index.html", name: "JavaScript权威指南"},
-        {name: "http://book.tangyefei.cn/es-6/_book/index.html", name: "ES6"},
-        {name: "http://book.tangyefei.cn/head-first-vuejs/_book/index.html", name: "深入浅出Vue.js"},
-        {name: "http://book.tangyefei.cn/flask-web-development/_book/index.html", name: "Flask Web Development"},
-        {name: "http://book.tangyefei.cn/professional-javascript/_book/index.html", name: "深入浅出React和Redux"},
-        {name: "http://book.tangyefei.cn/get-start-with-react-and-redux/_book/index.html", name: "JavaScript高级程序设计"},
-        {name: "http://book.tangyefei.cn/regexp-in-10-minutes/_book/index.html", name: "正则表达式必知必会"},
-        {name: "http://book.tangyefei.cn/react-action/_book/index.html", name: "极客时间：React实战进阶"},
-        {name: "http://book.tangyefei.cn/winter-relearn-fe/_book/index.html", name: "极客时间：重学前端"},
-        {name: "http://book.tangyefei.cn/play-webpack/_book/index.html", name: "极客时间：玩转Webpack"},
-        {name: "http://book.tangyefei.cn/computer-composition-theory/_book/index.html", name: "极客时间：浏览器原理"},
-        {name: "http://book.tangyefei.cn/browser-theory/_book/index.html", name: "极客时间：计算机组成原理"},
-        {name: "http://book.tangyefei.cn/graphic-http/_book/index.html", name: "图解HTTP"},
-        {name: "http://book.tangyefei.cn/flutter-action/_book/index.html", name: "Flutter实战"},
+        {href: "http://book.tangyefei.cn/javascript-guide/_book/index.html", name: "JavaScript权威指南"},
+        {href: "http://book.tangyefei.cn/es-6/_book/index.html", name: "ES6"},
+        {href: "http://book.tangyefei.cn/head-first-vuejs/_book/index.html", name: "深入浅出Vue.js"},
+        {href: "http://book.tangyefei.cn/flask-web-development/_book/index.html", name: "Flask Web Development"},
+        {href: "http://book.tangyefei.cn/professional-javascript/_book/index.html", name: "深入浅出React和Redux"},
+        {href: "http://book.tangyefei.cn/get-start-with-react-and-redux/_book/index.html", name: "JavaScript高级程序设计"},
+        {href: "http://book.tangyefei.cn/regexp-in-10-minutes/_book/index.html", name: "正则表达式必知必会"},
+        {href: "http://book.tangyefei.cn/react-action/_book/index.html", name: "极客时间：React实战进阶"},
+        {href: "http://book.tangyefei.cn/winter-relearn-fe/_book/index.html", name: "极客时间：重学前端"},
+        {href: "http://book.tangyefei.cn/play-webpack/_book/index.html", name: "极客时间：玩转Webpack"},
+        {href: "http://book.tangyefei.cn/computer-composition-theory/_book/index.html", name: "极客时间：浏览器原理"},
+        {href: "http://book.tangyefei.cn/browser-theory/_book/index.html", name: "极客时间：计算机组成原理"},
+        {href: "http://book.tangyefei.cn/graphic-http/_book/index.html", name: "图解HTTP"},
+        {href: "http://book.tangyefei.cn/flutter-action/_book/index.html", name: "Flutter实战"},
       ],
       books: [
         {title: "异类：不一样的成功启示录"}, {title: "我是你爸爸"}, {title: "被讨厌的勇气"}, {title: "运营之光2"}, {title: "小狗钱钱"}, {title: "信任的速度"}, {title: "鱼翅与花椒"}, {title: "投资最重要的事"}, {title: "随机漫步的傻瓜"}, {title: "能力陷阱"}, {title: "你的第一本保险指南"}, {title: "国富论"}, {title: "创业维艰"}, {title: "阿特拉斯耸耸肩"}, {title: "幸福之路"}, {title: "理性乐观派"}, {title: "最冷的冬天：美国人严重的朝鲜战争"}, {title: "怪诞行为学"}, {title: "银河帝国1：基地"}, {title: "生命不能承受之轻"}, {title: "奇迹男孩"}, {title: "从0到1"}, {title: "原则"}, {title: "这本书能让你睡得好"}, {title: "推拿"}, {title: "南京大屠杀"}, {title: "平衡的智慧"}, {title: "选择有灵魂的工作"}, {title: "达尔文传"}, {title: "投资异类"}, {title: "黑天鹅"}, {title: "斜杆青年"}, {title: "万物简史"}, {title: "富甲美国"}, {title: "自我关怀的力量"}, {title: "Mindset"}, {title: "Mavon Collin's Way"}
@@ -33,8 +34,9 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    Req.getArticles(res => {
+    Req.getArticles().then(res => {
       if(res.ok) {
+        res.body.forEach(d => d.created_at = Utils.format(d.created_at));
         this.setState({
           articles: res.body
         })

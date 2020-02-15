@@ -9,8 +9,9 @@ const service = axios.create({
 
 service.interceptors.response.use(
   response => {
-    const {res, status} = response.data;
+    const {data: res, status} = response;
     let message;
+    console.log(response);
     return new Promise((resolve, reject) => {
       if (status == 404) {
         message = res.message || '请求找不到';
