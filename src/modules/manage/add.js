@@ -3,6 +3,7 @@ import showdown  from "showdown";
 import HtmlToReactParser from 'html-to-react';
 import '../../css/base.css';
 import './add.css';
+import Req from '../../js/request';
 
 const debounce = function(action){
   setTimeout();
@@ -26,17 +27,26 @@ class Add extends React.Component {
       tags: ''
     }
     this.syncMarkdownHtml = this.syncMarkdownHtml.bind(this);
+    this.submit = this.submit.bind(this);
+  }
+
+  submit() {
+    let id = this.state.id;
+    Req.saveArticle(this.state).then(res => {
+      if(res.ok) {
+        alert(id ? '新增成功' : '编辑成功');
+        id = id || res.body.id;
+        window.open(window.origin + '/#/detail/22', '_blank');
+      }
+    })
   }
 
   componentDidMount() {
     if(this.state.id) {
-      this.setState({
-        token: 'ff6',
-        title: 'a',
-        type: 'b',
-        overview: '',
-        created_at: '2020/01/12',
-        tags: 'abc'
+      Req.getArticle(this.state.id).then(res => {
+        if(res.ok) {
+          this.setState(res.body)
+        }
       })
     }
   }
@@ -89,7 +99,7 @@ class Add extends React.Component {
                 <div className="preview-panel">{contentDOM}</div>
               </div>
             </div>
-            <div><input type="button" className="btn submit-btn" value="submit"/></div>
+            <div><input type="button" className="btn submit-btn" onClick={this.submit} value="submit"/></div>
         </form>
       </div>
     )
