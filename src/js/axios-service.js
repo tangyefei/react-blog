@@ -3,7 +3,7 @@ import axios from 'axios'
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 
 const service = axios.create({
-  baseURL: 'https://tangyefei.cn',
+  // baseURL: '',
   withCredentials: false,
 })
 
@@ -11,6 +11,8 @@ service.interceptors.response.use(
   response => {
     const res = response.data;
     let message;
+    console.log(response);
+    console.log(res);
     return new Promise((resolve, reject) => {
       if (res.status == 404) {
         message = res.message || '请求找不到';

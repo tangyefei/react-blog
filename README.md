@@ -1,0 +1,1 @@
+scp -P 22 -r ./dist root@212.64.71.36:/home/react-blog/
