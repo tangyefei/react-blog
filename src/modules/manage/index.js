@@ -1,12 +1,12 @@
 import React from 'react';
 import '../../css/base.css';
 import './manage.css'
+import { Link } from 'react-router-dom';
 
 class Manage extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
     this.state = {
-      articles:[]
+      articles:[],
     }
   }
 
@@ -32,14 +32,15 @@ class Manage extends React.Component {
     let articleComs = articles.map(d => 
     <li className="item" key={d.id}>
       {d.title}
-      <span className="btn del-btn" onClick={()=>{this.del(d)}}>delete</span>
-      <span className="btn view-btn">view</span>
+      <span className="btn del-btn" onClick={d => this.del(d)}>delete</span>
+      <span className="btn view-btn"><Link to={'/manage/edit/' + d.id}>view</Link></span>
     </li>);
     return (
       <div className="page manage-page">
         <h3>后台管理</h3>
         <div className="article-container">
           {articleComs}  
+          <span className="btn add-btn"><Link to="/manage/add">add</Link></span>
         </div>
       </div>
     )

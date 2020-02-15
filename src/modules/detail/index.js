@@ -36,7 +36,6 @@ class Detail extends React.Component {
   render() {
     let {title, date, type, tags, content} = this.state;
     let Parser = HtmlToReactParser.Parser();
-    debugger;
     let contentDOM = Parser.parse(content || '<span></span>');
     return (
       <div className="page detail-page">

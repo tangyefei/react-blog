@@ -1,0 +1,41 @@
+.view-page {
+  font-size: 1.2em;
+  margin: 0 auto;
+}
+.view-page h3 {
+  text-align: center;
+  margin-top: 20px;
+}
+.view-page form {
+  padding: 0 20px;
+}
+.view-page form > div {
+  display: flex;
+  margin-bottom: 0.5em;
+  line-height: 1.5em;
+}
+.view-page form > div label {
+  flex-basis: 100px;
+}
+.view-page form > div input,
+.view-page form > div textarea {
+  flex: 1;
+  width: 50%;
+}
+.view-page form > div input[type="button"] {
+  font-size: 2em;
+}
+.view-page form div .form-content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.view-page form div .form-content .markdown-editor,
+.view-page form div .form-content .preview-panel {
+  flex: 1;
+  width: 50%;
+}
+.view-page form div .form-content .preview-panel {
+  padding: 10px;
+  font-size: 14px;
+}
