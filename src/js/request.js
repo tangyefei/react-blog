@@ -12,17 +12,17 @@ export default {
   },
   Admin: {
     delArticle(id) {
-      return service.post('/api/manage/article/del', {id});
+      return service.delete(`/collections/articles/${id}`);
     },
   },
   saveArticle(data) {
-    return service.post('/api/article', data);
+    return service.post('/collections/articles', data);
   },
   getArticle(id) {
-    return service.get(`/api/article/${id}`);
+    return service.get(`/collections/articles/${id}`);
   },
   getArticles(param){
-    return service.get(`/api/articles`);
+    return service.get(`/collections/articles`);
   }
 }
 

@@ -27,11 +27,11 @@ class Manage extends React.Component {
   del(article) {
     let confirmed = window.confirm('确认要删除"' + article.title + '"吗？');
     if(confirmed) {
-      Req.Admin.delArticle(article.id).then(res => {
+      Req.Admin.delArticle(article._id).then(res => {
         if(res.ok) {
-          this.alert("删除成功");
+          window.alert("删除成功");
           this.setState({
-            articles: this.state.articles.filter(d => d.id != article.id)
+            articles: this.state.articles.filter(d => d._id != article._id)
           })
         }
       })
@@ -41,10 +41,10 @@ class Manage extends React.Component {
   render() {
     let {articles} = this.state;
     let articleComs = articles.map(d => 
-    <li className="item" key={d.id}>
+    <li className="item" key={d._id}>
       {d.title}
-      <span className="btn del-btn" onClick={d => this.del(d)}>delete</span>
-      <span className="btn view-btn"><Link to={'/manage/edit/' + d.id}>view</Link></span>
+      <span className="btn del-btn" onClick={e => this.del(d)}>delete</span>
+      <span className="btn view-btn"><Link to={'/manage/edit/' + d._id}>view</Link></span>
     </li>);
     return (
       <div className="page manage-page">

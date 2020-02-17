@@ -48,7 +48,7 @@ class Home extends React.Component {
     let guideComs = guides.map(d => <li key={d.name}><a href={d.href} target="_blank" className="tag">{d.name}</a></li>);
     let bookComs = books.map(d => <li key={d.title}><a className="tag">{d.title}</a></li>)
     let articleComs = articles.map(d => (
-      <div className="article"><Link to={'/detail/' + d.id}><h3>{d.title}</h3></Link><p className="meta"><span className="created-date">{d.created_at}</span><span className="tag">{d.type}({d.tags})</span></p><div className="overview">{d.overview}</div></div>
+      <div className="article"><Link to={'/detail/' + d._id}><h3>{d.title}</h3></Link><p className="meta"><span className="created-date">{d.created_at}</span><span className="tag">{d.type}({d.tags})</span></p><div className="overview">{d.overview}</div></div>
     ))
     return (
       <div className="page home-page">

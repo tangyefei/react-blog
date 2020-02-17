@@ -3,7 +3,7 @@ import axios from 'axios'
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 
 const service = axios.create({
-  // baseURL: '',
+  baseURL: 'http://localhost:3000',
   withCredentials: false,
 })
 
