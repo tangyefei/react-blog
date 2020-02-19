@@ -7,8 +7,8 @@ import Utils from './utils.js';
 export default {
   Auth: {
     login(data){
-      return ajax.postJson('/api/login', data, callback);
-    }
+      return service.post('/login', data);
+    },
   },
   Admin: {
     delArticle(id) {
